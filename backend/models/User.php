@@ -1,4 +1,5 @@
 <?php
+session_start();
 class User {
     private $conn;
     private $table_name = "users";
@@ -24,8 +25,11 @@ class User {
      * - Send welcome email
      * @return array User data or error message
      */
-    public function create() {
-        // TODO: Implement user creation
+    public function create($name,$email,$password,$role) {
+        $create_sql="insert into users (name,email,password,role) values ('$name','$email','$password','$role')";
+        $create_query=$this->conn->prepare($create_sql);
+        $create_query->execute();
+        return $create_query->rowCount();
     }
 
     /**
@@ -95,7 +99,24 @@ class User {
      */
     public function login($email, $password) {
         // TODO: Implement user login
-        echo json_encode(["email"=>$email,"password"=>$password]);
+        $login_sql="select * from users where username='$email'";
+        $login_query=$this->conn->prepare($login_sql);
+        $login_query->execute();
+        $login_result=$login_query->fetch(PDO::FETCH_ASSOC);
+            if($login_result){
+            if(password_verify($password,$login_result['password'])){
+                $_SESSION['user_id']=$login_result['id'];
+                $_SESSION['username']=$login_result['username'];
+                $_SESSION['role']=$login_result['role'];
+                return "login successful";
+            }
+            else{
+                return "invalid password '$password'";
+            }
+        }
+        else{
+            return "user not found";
+        }
     }
 }
 ?>
