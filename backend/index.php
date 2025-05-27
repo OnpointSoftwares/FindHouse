@@ -65,6 +65,13 @@ switch($endpoint) {
         break;
     case 'properties':
         $controller = new PropertyController($db);
+        if($action=="add")
+        {
+            $property_name="gibcon house";
+            $location="Nakuru";
+            $result=$controller->createProperty($property_name,$location);
+            echo json_encode(["result"=>$result]);
+        }
         // Handle property-related endpoints
         break;
     // Add other endpoints...

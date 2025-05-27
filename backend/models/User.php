@@ -97,6 +97,10 @@ class User {
      * @param string $password User password
      * @return array Authentication result with token
      */
+    public function logout(){
+        session_destroy();
+        return "logout successful";
+    }
     public function login($email, $password) {
         // TODO: Implement user login
         $login_sql="select * from users where username='$email'";
