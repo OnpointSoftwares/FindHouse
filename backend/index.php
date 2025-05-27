@@ -47,6 +47,20 @@ switch($endpoint) {
                 echo json_encode(["message" => $result,"success" => "false"]);
             }
         }
+        else if($action=='register')
+        {
+            $username="vincent";
+            $email="vincent@patahouse.com";
+            $password="123456";
+            $role="user";
+            $result=$controller->register($username,$email,$password,$role);
+            if($result==1){
+                echo json_encode(["message" => "register successful","success" => "true"]);
+            }
+            else{
+                echo json_encode(["message" => "register failed","success" => "false"]);
+            }
+        }
         // Handle user-related endpoints
         break;
     case 'properties':

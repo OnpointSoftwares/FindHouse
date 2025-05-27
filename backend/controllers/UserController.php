@@ -10,8 +10,10 @@ class UserController {
         $this->user = new User($db);
     }
 
-    public function register() {
+    public function register($username,$email,$password,$role) {
         // TODO: Handle user registration
+        $result=$this->user->create($username,$email,$password,$role);
+        return $result;
     }
 
     public function login($username,$password) {

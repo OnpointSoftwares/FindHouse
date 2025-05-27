@@ -25,8 +25,8 @@ class User {
      * - Send welcome email
      * @return array User data or error message
      */
-    public function create($name,$email,$password,$role) {
-        $create_sql="insert into users (name,email,password,role) values ('$name','$email','$password','$role')";
+    public function create($username,$email,$password,$role) {
+        $create_sql="insert into users (username,email,password,role) values ('$username','$email','$password','$role')";
         $create_query=$this->conn->prepare($create_sql);
         $create_query->execute();
         return $create_query->rowCount();
