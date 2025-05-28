@@ -70,7 +70,7 @@ switch($endpoint) {
             $property_name="gibcon house";
             $location="Nakuru";
             $result=$controller->createProperty($property_name,$location);
-            echo json_encode(["result"=>$result]);
+            echo json_encode(["result"=>$result,"success"=>"true"]);
         }
         // Handle property-related endpoints
         break;

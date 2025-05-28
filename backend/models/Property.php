@@ -29,6 +29,31 @@ class Property {
      */
     public function create() {
         // TODO: Implement property creation
+        $createTable="CREATE TABLE IF NOT EXISTS ".$this->table_name." (
+        id INT NOT NULL AUTO_INCREMENT,
+        title VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL,
+        price DECIMAL(10,2) NOT NULL,
+        address VARCHAR(255) NOT NULL,
+        city VARCHAR(100) NOT NULL,
+        status VARCHAR(50) NOT NULL,
+        owner_id INT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+        )";
+        $this->conn->exec($createTable);
+        $query="INSERT INTO ".$this->table_name." SET 
+        title=".$this->title.",
+        description=".$this->description.",
+        price=".$this->price.",
+        address=".$this->address.",
+        city=".$this->city.",
+        status=".$this->status.",
+        owner_id=".$this->owner_id.",
+        created_at=".$this->created_at."";
+        $stmt=$this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
     /**

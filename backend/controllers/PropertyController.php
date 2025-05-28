@@ -9,7 +9,7 @@ class PropertyController {
     }
 
     public function createProperty() {
-        $result=$this->property->createProperty();
+        $result=$this->property->create();
         return $result;
         // TODO: Handle property creation
     }
