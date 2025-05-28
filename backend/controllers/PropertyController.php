@@ -8,8 +8,8 @@ class PropertyController {
         $this->property = new Property($db);
     }
 
-    public function createProperty() {
-        $result=$this->property->create();
+    public function createProperty($title,$description,$price,$address,$city,$status,$owner_id) {
+        $result=$this->property->create($title,$description,$price,$address,$city,$status,$owner_id);
         return $result;
         // TODO: Handle property creation
     }

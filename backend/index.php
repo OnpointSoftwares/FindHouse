@@ -68,8 +68,13 @@ switch($endpoint) {
         if($action=="add")
         {
             $property_name="gibcon house";
-            $location="Nakuru";
-            $result=$controller->createProperty($property_name,$location);
+            $description="gibcon house";
+            $price=1000;
+            $address="Nakuru";
+            $city="Nakuru";
+            $status="available";
+            $owner_id=1;
+            $result=$controller->createProperty($property_name,$description,$price,$address,$city,$status,$owner_id);
             echo json_encode(["result"=>$result,"success"=>"true"]);
         }
         // Handle property-related endpoints

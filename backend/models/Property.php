@@ -27,7 +27,14 @@ class Property {
      * - Calculate any initial metrics
      * @return array New property data with ID
      */
-    public function create() {
+    public function create($title,$description,$price,$address,$city,$status,$owner_id) {
+        $this->title=$title;
+        $this->description=$description;
+        $this->price=$price;
+        $this->address=$address;
+        $this->city=$city;
+        $this->status=$status;
+        $this->owner_id=$owner_id;
         // TODO: Implement property creation
         $createTable="CREATE TABLE IF NOT EXISTS ".$this->table_name." (
         id INT NOT NULL AUTO_INCREMENT,
@@ -42,15 +49,7 @@ class Property {
         PRIMARY KEY (id)
         )";
         $this->conn->exec($createTable);
-        $query="INSERT INTO ".$this->table_name." SET 
-        title=".$this->title.",
-        description=".$this->description.",
-        price=".$this->price.",
-        address=".$this->address.",
-        city=".$this->city.",
-        status=".$this->status.",
-        owner_id=".$this->owner_id.",
-        created_at=".$this->created_at."";
+        $query="INSERT INTO ".$this->table_name."(title,description,price,address,city,status,owner_id,created_at) VALUES('$this->title','$this->description',$this->price,'$this->address','$this->city','$this->status',$this->owner_id,NOW())";
         $stmt=$this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
